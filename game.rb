@@ -19,6 +19,16 @@ class Game
     end
   end
 
+  def first_round(player, other_player)
+    puts " "
+    puts " ----- START GAME ----- "
+    puts " "
+    r1 = Round.new
+    r1.ask_question(player)
+    r1.check_answer(player, other_player)
+    self.switch_current_player
+  end
+
   def run_round(player, other_player)
     puts " "
     puts " ----- NEW TURN ----- "
@@ -30,6 +40,7 @@ class Game
   end
 
   def play_game (current_player, other_player)
+    self.first_round(self.current_player, self.other_player)
     while current_player.lives > 0 && other_player.lives > 0
     self.run_round(self.current_player, self.other_player)
     end
