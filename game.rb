@@ -1,12 +1,10 @@
-require "./player.rb"
-require "./round.rb"
 class Game
 
   attr_accessor :p1, :p2, :current_player, :other_player
 
   def initialize
-    @p1 = Player.new("Player 1", "P1")
-    @p2 = Player.new("Player 2", "P2")
+    @p1 = Player.new("Player 1", "🥇P1")
+    @p2 = Player.new("Player 2", "🥈P2")
     @current_player = @p1
     @other_player = @p2
   end
@@ -21,28 +19,22 @@ class Game
     end
   end
 
-
-  def play_game
-    # While both lives > 0
-    # ~Run Round 
-    # When lives = 0 
-    # ~Game Over
-  end
-
   def run_round(player, other_player)
+    puts " "
     puts " ----- NEW TURN ----- "
+    puts " "
     r1 = Round.new
-    puts "You're up, #{self.current_player.name}"
     r1.ask_question(player)
     r1.check_answer(player, other_player)
     self.switch_current_player
-    puts "Now it's your turn, #{self.current_player.name}"
+  end
+
+  def play_game (current_player, other_player)
+    while current_player.lives > 0 && other_player.lives > 0
+    self.run_round(self.current_player, self.other_player)
+    end
   end
 
 end
-
-g = Game.new
-g.run_round(g.current_player, g.other_player)
-g.run_round(g.current_player, g.other_player)
 
 
